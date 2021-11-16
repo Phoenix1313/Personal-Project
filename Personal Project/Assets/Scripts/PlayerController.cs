@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
     public float speed = 10.0f;
-    public float xRange = 10.0f;
+    public float xRange = 12.0f;
     public float jumpForce = 10;
     public float gravityModifier;
     public bool isOnGround = true;
@@ -44,7 +44,6 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
         }
-
     }
     private void OnCollisionEnter(Collision collision)
     {
