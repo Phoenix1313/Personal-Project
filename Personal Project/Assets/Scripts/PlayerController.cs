@@ -6,10 +6,14 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
     public float speed = 10.0f;
-    public float xRange = 12.0f;
+    public float xRange = 35.0f;
     public float jumpForce = 10;
     public float gravityModifier;
-    public bool isOnGround = true;
+    public float bounce = 6;
+    public bool isOnGround = false;
+    public bool isBouncing = true;
+    Vector2 movement;
+
 
     // Start is called before the first frame update
     void Start()
@@ -35,9 +39,9 @@ public class PlayerController : MonoBehaviour
         }
 
         // Restricting player from going off screen
-        if (transform.position.x < -xRange)
+        if (transform.position.x < -11)
         {
-            transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
+            transform.position = new Vector3(-11, transform.position.y, transform.position.z);
         }
 
         if (transform.position.x > xRange)
@@ -45,11 +49,22 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
         }
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
             isOnGround = true;
         }
+       else if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            playerRb.AddForce(collision.contacts[0].normal * bounce);
+            isBouncing = true;
+            Invoke("StopBounce", 0.3f);
+        }
+    }
+    void StopBounce()
+    {
+        isBouncing = false;
     }
 }
