@@ -1,0 +1,6 @@
+sceneSetups:
+- path: D:/GIT/2.0 Personal Project/Personal-Project/Personal Project/Assets/Scenes/My
+    Game.unity
+  isLoaded: 1
+  isActive: 1
+  isSubScene: 0
